@@ -24,6 +24,8 @@ ofxSKB::ofxSKB() {
     moveKeyboard = false;
     resizeKeyboard = false;
     
+    scaleMouseCoordinates = ofPoint(1,1);
+    
     textColor = 0x000000;
 	textBGColor = 0x888888;
 	borderColor = 0x000000;
@@ -189,6 +191,11 @@ ofVec2f ofxSKB::getPosition() {
 }
 
 //--------------------------------------------------------------
+void ofxSKB::setScaleMouseCoordinates(ofPoint scale) {
+    scaleMouseCoordinates = scale;
+}
+
+//--------------------------------------------------------------
 bool ofxSKB::keyboardVisible() {
     return kbShow;
 }
@@ -292,7 +299,7 @@ void ofxSKB::draw() {
             keys[i].x = xpos;
             keys[i].y = ypos;
             
-            if (keyTest(keys[i], ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY)) {
+            if (keyTest(keys[i], ofGetAppPtr()->mouseX * scaleMouseCoordinates.x, ofGetAppPtr()->mouseY * scaleMouseCoordinates.y)) {
                 ofSetHexColor(hoverColor);
             } else {
                 ofSetHexColor(textBGColor);
@@ -330,6 +337,9 @@ void ofxSKB::draw() {
 
 //--------------------------------------------------------------
 void ofxSKB::mouseDragged(ofMouseEventArgs& args){
+    args.x *= scaleMouseCoordinates.x;
+    args.y *= scaleMouseCoordinates.y;
+    
     if (resizeKeyboard) {
         if (((args.x + 10) < ofGetWidth()) && ((args.y + 10) < ofGetHeight())) {
             float tkbSetWidth;
@@ -352,14 +362,20 @@ void ofxSKB::mouseDragged(ofMouseEventArgs& args){
 
 //--------------------------------------------------------------
 void ofxSKB::mouseMoved(ofMouseEventArgs& args){
+    args.x *= scaleMouseCoordinates.x;
+    args.y *= scaleMouseCoordinates.y;
+    
     previousX = args.x;
     previousY = args.y;
 }
 
 //--------------------------------------------------------------
 void ofxSKB::mousePressed(ofMouseEventArgs& args){
+    args.x *= scaleMouseCoordinates.x;
+    args.y *= scaleMouseCoordinates.y;
+    
     for(unsigned int i=0; i<keys.size(); i++) {
-        if (keyTest(keys[i], ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY)) {
+        if (keyTest(keys[i], args.x, args.y)) {
             int tmp = shiftState(OFXSKB_PRESS, keys[i].key[0]);
             
             switch(keys[i].key[tmp]) {
@@ -396,10 +412,13 @@ void ofxSKB::mousePressed(ofMouseEventArgs& args){
 
 //--------------------------------------------------------------
 void ofxSKB::mouseReleased(ofMouseEventArgs& args){
+    args.x *= scaleMouseCoordinates.x;
+    args.y *= scaleMouseCoordinates.y;
+    
     moveKeyboard = false;
     resizeKeyboard = false;
     for(unsigned int i=0; i<keys.size(); i++) {
-        if (keyTest(keys[i], ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY)) {
+        if (keyTest(keys[i], args.x, args.y)) {
             int tmp = shiftState(OFXSKB_RELEASE, keys[i].key[0]);
             
             switch(keys[i].key[tmp]) {

@@ -53,6 +53,7 @@ class ofxSKB   {
     void draw();
     void setFont(string _kbFontName);
     void setSize(float width);
+    void setScaleMouseCoordinates(ofPoint scale);
     float getSize();
     ofVec2f getPosition();
     void setPosition(float _x, float _y);
@@ -69,6 +70,7 @@ class ofxSKB   {
     vector<ofxSKBKeyType> keys;
 
   private:
+    ofPoint scaleMouseCoordinates;
     float x, y;
     float previousX, previousY;
     float kbSizer;
