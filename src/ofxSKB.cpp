@@ -16,6 +16,7 @@ ofxSKB::ofxSKB() {
     kbFontName = "";
     kbSetWidth = 0;
     kbSetWidthOld = 0;
+    kbShow = false;
     
     caps = false;
     shift = false;
