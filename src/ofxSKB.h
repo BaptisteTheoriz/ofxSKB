@@ -53,7 +53,6 @@ class ofxSKB   {
     void draw();
     void setFont(string _kbFontName);
     void setSize(float width);
-    void setScaleMouseCoordinates(ofPoint scale);
     float getSize();
     ofVec2f getPosition();
     void setPosition(float _x, float _y);
@@ -70,7 +69,6 @@ class ofxSKB   {
     vector<ofxSKBKeyType> keys;
 
   private:
-    ofPoint scaleMouseCoordinates;
     float x, y;
     float previousX, previousY;
     float kbSizer;
@@ -86,10 +84,13 @@ class ofxSKB   {
     bool moveKeyboard;
     bool resizeKeyboard;
     int textColor, textBGColor, borderColor, hoverColor, clickColor;
+    
+    ofRectangle viewport;
 
     void addKey(int _key0, int _key1, bool lastInRow = false);
     int shiftState(int action = -1, int key = -1);
     bool keyTest(ofxSKBKeyType key, int tx, int ty);
+    ofVec2f scaleMouseCoordinates(int mouseX, int mouseY);
 };
 
 #endif
