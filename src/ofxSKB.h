@@ -18,6 +18,8 @@ github by Lensley.
 #define OFXSKB_KEY_MOVE 10002
 #define OFXSKB_KEY_HIDE 10003
 #define OFXSKB_KEY_RESIZE 10004
+#define OFXSKB_KEY_DOTCOM 10005
+#define OFXSKB_KEY_DOTFR 10006
 
 #define OFXSKB_PRESS 1
 #define OFXSKB_RELEASE 2
@@ -49,6 +51,12 @@ class ofxSKB   {
   public:
     ofxSKB();
     ~ofxSKB();
+    
+    enum KeyboardLayout{
+        SKB_LAYOUT_KEYBOARD_EN,
+        SKB_LAYOUT_KEYBOARD_FR,
+        SKB_LAYOUT_KEYBOARD_FR_MAIL
+    };
 
     void draw();
     void setFont(string _kbFontName);
@@ -59,6 +67,7 @@ class ofxSKB   {
     bool keyboardVisible();
     void hideKeyboard();
     void showKeyboard();
+    void setLayout(KeyboardLayout layout);
 
     void mouseDragged(ofMouseEventArgs& args);
     void mouseMoved(ofMouseEventArgs& args);

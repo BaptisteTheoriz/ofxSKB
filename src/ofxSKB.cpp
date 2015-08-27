@@ -33,38 +33,7 @@ ofxSKB::ofxSKB() {
     kbBaseWidth = (DEFAULT_W * 13) + DELETE_W + (KEY_P * 28);
     kbBaseHeight = (KEY_H * 5) + (KEY_P * 10);
     
-    addKey('~', '`'); addKey('1', '!'); addKey('2', '@');
-    addKey('3', '#'); addKey('4', '$'); addKey('5', '%');
-    addKey('6', '^'); addKey('7', '&'); addKey('8', '*');
-    addKey('9', '('); addKey('0', ')'); addKey('-', '_');
-    addKey('+', '='); addKey(OF_KEY_DEL,-1, true);
-    
-    addKey(OF_KEY_TAB, -1); addKey('q', 0); addKey('w', 0);
-    addKey('e', 0); addKey('r', 0); addKey('t', 0);
-    addKey('y', 0); addKey('u', 0); addKey('i', 0);
-    addKey('o', 0); addKey('p', 0); addKey('[', 0);
-    addKey(']', 0); addKey('|', 0, true);
-    
-    addKey(OFXSKB_KEY_CAPS, -1); ; addKey('a', 0); addKey('s', 0);
-    addKey('d', 0); addKey('f', 0); addKey('g', 0);
-    addKey('h', 0); addKey('j', 0); addKey('k', 0);
-    addKey('l', 0); addKey(';', ':'); addKey('\'', '\"');
-    addKey(OF_KEY_RETURN, -1, true);
-    
-    addKey(OF_KEY_SHIFT, -1); addKey('z', 0); addKey('x', 0);
-    addKey('c', 0); addKey('v', 0); addKey('b', 0);
-    addKey('n', 0); addKey('m', 0); addKey(',', '<');
-    addKey('.', '>'); addKey('/', '?'); addKey(OF_KEY_SHIFT, -1, true);
-    
-    addKey(OFXSKB_KEY_MOVE, -1);
-    
-    addKey(' ', -1);
-    keys.back().basePadLeft = SPACE_P - KEY_P - (DEFAULT_W*2);
-    keys.back().basePadRight = SPACE_P - (KEY_P * 5) - (DEFAULT_W*4);
-    keys.back().baseWidth = SPACE_W;
-    
-    addKey(OFXSKB_KEY_HIDE, -1);
-    addKey(OFXSKB_KEY_RESIZE, -1);
+    setLayout(SKB_LAYOUT_KEYBOARD_EN);
     
     showKeyboard();
 }
@@ -73,6 +42,129 @@ ofxSKB::ofxSKB() {
 ofxSKB::~ofxSKB() {
     hideKeyboard();
     keys.clear();
+}
+
+//--------------------------------------------------------------
+void ofxSKB::setLayout(KeyboardLayout layout) {
+    keys.clear();
+    
+    switch (layout) {
+        case SKB_LAYOUT_KEYBOARD_EN:
+            
+            addKey('~', '`'); addKey('1', '!'); addKey('2', '@');
+            addKey('3', '#'); addKey('4', '$'); addKey('5', '%');
+            addKey('6', '^'); addKey('7', '&'); addKey('8', '*');
+            addKey('9', '('); addKey('0', ')'); addKey('-', '_');
+            addKey('+', '='); addKey(OF_KEY_DEL,-1, true);
+            
+            addKey(OF_KEY_TAB, -1); addKey('q', 0); addKey('w', 0);
+            addKey('e', 0); addKey('r', 0); addKey('t', 0);
+            addKey('y', 0); addKey('u', 0); addKey('i', 0);
+            addKey('o', 0); addKey('p', 0); addKey('[', 0);
+            addKey(']', 0); addKey('|', 0, true);
+            
+            addKey(OFXSKB_KEY_CAPS, -1); ; addKey('a', 0); addKey('s', 0);
+            addKey('d', 0); addKey('f', 0); addKey('g', 0);
+            addKey('h', 0); addKey('j', 0); addKey('k', 0);
+            addKey('l', 0); addKey(';', ':'); addKey('\'', '\"');
+            addKey(OF_KEY_RETURN, -1, true);
+            
+            addKey(OF_KEY_SHIFT, -1); addKey('z', 0); addKey('x', 0);
+            addKey('c', 0); addKey('v', 0); addKey('b', 0);
+            addKey('n', 0); addKey('m', 0); addKey(',', '<');
+            addKey('.', '>'); addKey('/', '?'); addKey(OF_KEY_SHIFT, -1, true);
+            
+            addKey(OFXSKB_KEY_MOVE, -1);
+            
+            addKey(' ', -1);
+            keys.back().basePadLeft = SPACE_P - KEY_P - (DEFAULT_W*2);
+            keys.back().basePadRight = SPACE_P - (KEY_P * 5) - (DEFAULT_W*4);
+            keys.back().baseWidth = SPACE_W;
+            
+            addKey(OFXSKB_KEY_HIDE, -1);
+            addKey(OFXSKB_KEY_RESIZE, -1);
+            
+            break;
+            
+        case SKB_LAYOUT_KEYBOARD_FR:
+            
+            addKey('~', '`'); addKey('1', '!'); addKey('2', '@');
+            addKey('3', '#'); addKey('4', '$'); addKey('5', '%');
+            addKey('6', '^'); addKey('7', '&'); addKey('8', '*');
+            addKey('9', '('); addKey('0', ')'); addKey('-', '_');
+            addKey('+', '='); addKey(OF_KEY_DEL,-1, true);
+            
+            addKey(OF_KEY_TAB, -1); addKey('a', 0); addKey('z', 0);
+            addKey('e', 0); addKey('r', 0); addKey('t', 0);
+            addKey('y', 0); addKey('u', 0); addKey('i', 0);
+            addKey('o', 0); addKey('p', 0); addKey('^', 0);
+            addKey('$', 0); addKey('*', 0, true);
+            
+            addKey(OFXSKB_KEY_CAPS, -1); addKey('q', 0); addKey('s', 0);
+            addKey('d', 0); addKey('f', 0); addKey('g', 0);
+            addKey('h', 0); addKey('j', 0); addKey('k', 0);
+            addKey('l', 0); addKey('m', 0); addKey('%', '0');
+            addKey(OF_KEY_RETURN, -1, true);
+            
+            addKey(OF_KEY_SHIFT, -1); addKey('<', '>'); addKey('w', 0);
+            addKey('x', 0); addKey('c', 0); addKey('v', 0);
+            addKey('b', 0); addKey('n', 0); addKey(',', '?');
+            addKey(';', '.'); addKey(':', '/'); addKey('!', 0);
+            addKey(OF_KEY_SHIFT, -1, true);
+            
+            addKey(OFXSKB_KEY_MOVE, -1);
+            
+            addKey(' ', -1);
+            keys.back().basePadLeft = SPACE_P - KEY_P - (DEFAULT_W*2);
+            keys.back().basePadRight = SPACE_P - (KEY_P * 5) - (DEFAULT_W*4);
+            keys.back().baseWidth = SPACE_W;
+            
+            addKey(OFXSKB_KEY_HIDE, -1);
+            addKey(OFXSKB_KEY_RESIZE, -1);
+            
+            break;
+            
+        case SKB_LAYOUT_KEYBOARD_FR_MAIL:
+            
+            kbBaseWidth = (DEFAULT_W * 12) + (KEY_P * 26);
+            
+            addKey('1', '&'); addKey('2', '~'); addKey('3', '#');
+            addKey('4', '\''); addKey('5', '('); addKey('6', ')');
+            addKey('7', '$'); addKey('8', '*'); addKey('9', ':');
+            addKey('0', ';'); addKey('+', ','); addKey('=', '!', true);
+            
+            addKey('a', 0); keys.back().basePadLeft = DEFAULT_W/2;
+            addKey('z', 0); addKey('e', 0); addKey('r', 0);
+            addKey('t', 0); addKey('y', 0); addKey('u', 0);
+            addKey('i', 0); addKey('o', 0); addKey('p', 0);
+            addKey(OF_KEY_DEL,-1, true); keys.back().baseWidth = DELETE_W - KEY_P;
+            
+            addKey(OFXSKB_KEY_CAPS, -1); keys.back().baseWidth = DEFAULT_W;
+            addKey('q', 0); addKey('s', 0); addKey('d', 0);
+            addKey('f', 0); addKey('g', 0); addKey('h', 0);
+            addKey('j', 0); addKey('k', 0); addKey('l', 0);
+            addKey('m', 0); addKey(OF_KEY_RETURN, -1, true); keys.back().baseWidth = DEFAULT_W;
+            
+            addKey(OF_KEY_SHIFT, -1); keys.back().baseWidth = 1.5 * DEFAULT_W + KEY_P;
+            addKey('w', 0); addKey('x', 0); addKey('c', 0);
+            addKey('v', 0); addKey('b', 0); addKey('n', 0);
+            addKey('@', '@'); addKey('_', '_'); addKey('-', '-');
+            addKey(OF_KEY_SHIFT, -1, true); keys.back().baseWidth = 1.5 * DEFAULT_W + KEY_P;
+            
+            addKey(' ', -1);
+            keys.back().basePadLeft = SPACE_P - KEY_P - (DEFAULT_W*2);
+            keys.back().basePadRight = 3*KEY_P;
+            keys.back().baseWidth = SPACE_W;
+            
+            addKey('.', '.'); addKey(OFXSKB_KEY_DOTFR, -1); addKey(OFXSKB_KEY_DOTCOM, -1);
+            
+
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------
@@ -150,6 +242,20 @@ void ofxSKB::addKey(int _key0, int _key1, bool lastInRow) {
 			key.baseWidth = DEFAULT_W*2;
 			key.baseHeight = KEY_H;
 			break;
+        case OFXSKB_KEY_DOTCOM:
+            key.label[0] = ".com";
+            key.label[1] = ".com";
+            key.key[1] = OFXSKB_KEY_DOTCOM;
+			key.baseWidth = DEFAULT_W;
+			key.baseHeight = KEY_H;
+            break;
+        case OFXSKB_KEY_DOTFR:
+            key.label[0] = ".fr";
+            key.label[1] = ".fr";
+            key.key[1] = OFXSKB_KEY_DOTFR;
+			key.baseWidth = DEFAULT_W;
+			key.baseHeight = KEY_H;
+            break;
 		default:
 			key.label[0] = string(1, key.key[0]);
 			key.label[1] = string(1, key.key[1]);
@@ -394,6 +500,17 @@ void ofxSKB::mousePressed(ofMouseEventArgs& args){
                 case OFXSKB_KEY_RESIZE:
                     resizeKeyboard = true;
                     break;
+                case OFXSKB_KEY_DOTCOM:
+                    ofNotifyKeyPressed('.');
+                    ofNotifyKeyPressed('c');
+                    ofNotifyKeyPressed('o');
+                    ofNotifyKeyPressed('m');
+                    break;
+                case OFXSKB_KEY_DOTFR:
+                    ofNotifyKeyPressed('.');
+                    ofNotifyKeyPressed('f');
+                    ofNotifyKeyPressed('r');
+                    break;
                 default:
                     ofNotifyKeyPressed(keys[i].key[tmp]);
                     break;
@@ -430,6 +547,17 @@ void ofxSKB::mouseReleased(ofMouseEventArgs& args){
                 case OFXSKB_KEY_MOVE:
                 case OFXSKB_KEY_HIDE:
                 case OFXSKB_KEY_RESIZE:
+                    break;
+                case OFXSKB_KEY_DOTCOM:
+                    ofNotifyKeyReleased('.');
+                    ofNotifyKeyReleased('c');
+                    ofNotifyKeyReleased('o');
+                    ofNotifyKeyReleased('m');
+                    break;
+                case OFXSKB_KEY_DOTFR:
+                    ofNotifyKeyReleased('.');
+                    ofNotifyKeyReleased('f');
+                    ofNotifyKeyReleased('r');
                     break;
                 default:
                     ofNotifyKeyReleased(keys[i].key[tmp]);
