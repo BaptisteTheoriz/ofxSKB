@@ -93,6 +93,7 @@ class ofxSKB   {
     float kbSetWidth, kbSetWidthOld;
     float kbBaseWidth, kbBaseHeight;
     ofTrueTypeFont kbFont;
+    ofTrueTypeFont kbFontSmall;
     string kbFontName;
     bool kbShow;
     bool caps;
@@ -104,6 +105,8 @@ class ofxSKB   {
     
     bool fillKeyboard;
     bool fillKeys;
+    
+    bool isMousePressed;
     
     ofRectangle viewport;
 

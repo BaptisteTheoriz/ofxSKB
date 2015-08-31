@@ -27,6 +27,8 @@ ofxSKB::ofxSKB() {
     fillKeyboard = true;
     fillKeys = true;
     
+    isMousePressed = false;
+    
     textColor = 0x000000;
 	textBGColor = 0x888888;
 	borderColor = 0x000000;
@@ -218,8 +220,8 @@ void ofxSKB::addKey(int _key0, int _key1, bool lastInRow) {
 			key.baseHeight = KEY_H;
 			break;
 		case OF_KEY_RETURN:
-			key.label[0] = "return";
-			key.label[1] = "RETURN";
+			key.label[0] = "OK";
+			key.label[1] = "OK";
             key.key[1] = OF_KEY_RETURN;
 			key.baseWidth = RETURN_W;
 			key.baseHeight = KEY_H;
@@ -391,7 +393,9 @@ void ofxSKB::draw() {
             kbHeight = kbBaseHeight * kbSizer;
             
             if (kbFont.isLoaded()) kbFont.unbind();
-            kbFont.loadFont(kbFontName, 2*kbSizer);
+            kbFont.loadFont(kbFontName, 4*kbSizer);
+            if (kbFontSmall.isLoaded()) kbFontSmall.unbind();
+            kbFontSmall.loadFont(kbFontName, 2*kbSizer);
             for(unsigned int i=0; i<keys.size(); i++) {
                 keys[i].width = keys[i].baseWidth*kbSizer,
                 keys[i].height = keys[i].baseHeight*kbSizer;
@@ -415,15 +419,25 @@ void ofxSKB::draw() {
             keys[i].y = ypos;
             
             ofVec2f mousePos = scaleMouseCoordinates(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY);
-            if (keyTest(keys[i], mousePos.x, mousePos.y)) {
+            if (keyTest(keys[i], mousePos.x, mousePos.y) && isMousePressed) {
                 ofSetHexColor(hoverColor);
+                ofFill();
+                ofRect(xpos, ypos, keys[i].width, keys[i].height);
             } else {
                 ofSetHexColor(textBGColor);
+                if(fillKeys){
+                    ofFill();
+                    ofRect(xpos, ypos, keys[i].width, keys[i].height);
+                }
             }
             
-            ofFill();
-            ofRect(xpos, ypos, keys[i].width, keys[i].height);
-            
+            int tmp = shiftState();
+            if(keys[i].key[tmp] == OF_KEY_RETURN){
+                ofSetHexColor(hoverColor);
+                ofFill();
+                ofRect(xpos, ypos, keys[i].width, keys[i].height);
+            }
+                
             // Draw the outline.
             ofNoFill();
             ofSetHexColor(borderColor);
@@ -431,10 +445,17 @@ void ofxSKB::draw() {
             
             // Draw the actual letter
             ofSetHexColor(textColor);
+        
+            if(keys[i].label[tmp].size() > 1){
+                kbFontSmall.drawString(keys[i].label[tmp],
+                                  (xpos+keys[i].width/2) - kbFontSmall.stringWidth(keys[i].label[tmp])/2,
+                                  (ypos+keys[i].height/2) + kbFontSmall.stringHeight(keys[i].label[tmp])/2);
+            } else {
+                kbFont.drawString(keys[i].label[tmp],
+                                  (xpos+keys[i].width/2) - kbFont.stringWidth(keys[i].label[tmp])/2,
+                                  (ypos+keys[i].height/2) + kbFont.stringHeight(keys[i].label[tmp])/2);
+            }
             
-            int tmp = shiftState();
-            kbFont.drawString(keys[i].label[tmp], xpos+keys[i].padLeft,
-                              (ypos+(keys[i].height))-keys[i].padTop);
 #ifdef TARGET_SUNXI_MFB
 #pragma message ("ofEnableAlphaBlending() inserted")
             ofEnableAlphaBlending();
@@ -487,6 +508,8 @@ void ofxSKB::mouseMoved(ofMouseEventArgs& args){
 void ofxSKB::mousePressed(ofMouseEventArgs& args){
     ofVec2f mousePos = scaleMouseCoordinates(args.x, args.y);
     
+    isMousePressed = true;
+    
     for(unsigned int i=0; i<keys.size(); i++) {
         if (keyTest(keys[i], mousePos.x, mousePos.y)) {
             int tmp = shiftState(OFXSKB_PRESS, keys[i].key[0]);
@@ -537,6 +560,8 @@ void ofxSKB::mousePressed(ofMouseEventArgs& args){
 //--------------------------------------------------------------
 void ofxSKB::mouseReleased(ofMouseEventArgs& args){
     ofVec2f mousePos = scaleMouseCoordinates(args.x, args.y);
+    
+    isMousePressed = false;
     
     moveKeyboard = false;
     resizeKeyboard = false;
