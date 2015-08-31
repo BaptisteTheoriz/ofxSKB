@@ -24,6 +24,9 @@ ofxSKB::ofxSKB() {
     moveKeyboard = false;
     resizeKeyboard = false;
     
+    fillKeyboard = true;
+    fillKeys = true;
+    
     textColor = 0x000000;
 	textBGColor = 0x888888;
 	borderColor = 0x000000;
@@ -295,6 +298,15 @@ ofVec2f ofxSKB::getPosition() {
 }
 
 //--------------------------------------------------------------
+void ofxSKB::setTextColor(int hexColor){ textColor = hexColor; }
+void ofxSKB::setTextBGColor(int hexColor){ textBGColor = hexColor; }
+void ofxSKB::setBorderColor(int hexColor){ borderColor = hexColor; }
+void ofxSKB::setHoverColor(int hexColor){ hoverColor = hexColor; }
+void ofxSKB::setClickColor(int hexColor){ clickColor = hexColor; }
+void ofxSKB::setFillKeyboard(bool b){ fillKeyboard = b; }
+void ofxSKB::setFillKeys(bool b){ fillKeys = b; }
+
+//--------------------------------------------------------------
 bool ofxSKB::keyboardVisible() {
     return kbShow;
 }
@@ -389,8 +401,10 @@ void ofxSKB::draw() {
                 keys[i].padLeft = keys[i].basePadLeft*kbSizer;
             }
         }
-        ofSetHexColor(borderColor);
-        ofRect(x, y, kbWidth, kbHeight);
+        if(fillKeyboard){
+            ofSetHexColor(borderColor);
+            ofRect(x, y, kbWidth, kbHeight);
+        }
         
         ypos += keys[0].padTop;
         

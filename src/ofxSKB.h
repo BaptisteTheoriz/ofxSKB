@@ -73,6 +73,14 @@ class ofxSKB   {
     void mouseMoved(ofMouseEventArgs& args);
     void mousePressed(ofMouseEventArgs& args);
     void mouseReleased(ofMouseEventArgs& args);
+    
+    void setTextColor(int hexColor);
+    void setTextBGColor(int hexColor);
+    void setBorderColor(int hexColor);
+    void setHoverColor(int hexColor);
+    void setClickColor(int hexColor);
+    void setFillKeyboard(bool b);
+    void setFillKeys(bool b);
 
   protected:
     vector<ofxSKBKeyType> keys;
@@ -93,6 +101,9 @@ class ofxSKB   {
     bool moveKeyboard;
     bool resizeKeyboard;
     int textColor, textBGColor, borderColor, hoverColor, clickColor;
+    
+    bool fillKeyboard;
+    bool fillKeys;
     
     ofRectangle viewport;
 
