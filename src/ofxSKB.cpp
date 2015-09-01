@@ -287,6 +287,16 @@ float ofxSKB::getSize() {
 }
 
 //--------------------------------------------------------------
+float ofxSKB::getKbWidth() {
+    return kbWidth;
+}
+
+//--------------------------------------------------------------
+float ofxSKB::getKbHeight() {
+    return kbHeight;
+}
+
+//--------------------------------------------------------------
 void ofxSKB::setPosition(float _x, float _y) {
     x = _x;
     y = _y;
@@ -526,7 +536,7 @@ void ofxSKB::mousePressed(ofMouseEventArgs& args){
                     ofNotifyKeyPressed(OF_KEY_BACKSPACE);
                     break;
                 case OF_KEY_RETURN:
-                    ofNotifyKeyPressed('\n');
+                    ofNotifyKeyPressed(OF_KEY_RETURN);
                     break;
                 case OFXSKB_KEY_MOVE:
                     moveKeyboard = true;

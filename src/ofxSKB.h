@@ -62,6 +62,8 @@ class ofxSKB   {
     void setFont(string _kbFontName);
     void setSize(float width);
     float getSize();
+    float getKbWidth();
+    float getKbHeight();
     ofVec2f getPosition();
     void setPosition(float _x, float _y);
     bool keyboardVisible();
