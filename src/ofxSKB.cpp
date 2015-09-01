@@ -459,11 +459,11 @@ void ofxSKB::draw() {
             if(keys[i].label[tmp].size() > 1){
                 kbFontSmall.drawString(keys[i].label[tmp],
                                   (xpos+keys[i].width/2) - kbFontSmall.stringWidth(keys[i].label[tmp])/2,
-                                  (ypos+keys[i].height/2) + kbFontSmall.stringHeight(keys[i].label[tmp])/2);
+                                  (ypos+keys[i].height/2) + + kbFontSmall.getSize()/2);
             } else {
                 kbFont.drawString(keys[i].label[tmp],
                                   (xpos+keys[i].width/2) - kbFont.stringWidth(keys[i].label[tmp])/2,
-                                  (ypos+keys[i].height/2) + kbFont.stringHeight(keys[i].label[tmp])/2);
+                                  (ypos+keys[i].height/2) + kbFont.getSize()/2);
             }
             
 #ifdef TARGET_SUNXI_MFB
