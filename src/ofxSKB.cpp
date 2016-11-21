@@ -583,33 +583,33 @@ void ofxSKB::mouseReleased(ofMouseEventArgs& args){
                 case OF_KEY_SHIFT:
                     break;
                 case OF_KEY_TAB:
-					ofEvents().notifyKeyPressed('\t');
+					ofEvents().notifyKeyReleased('\t');
                     break;
                 case OFXSKB_KEY_CAPS:
                     break;
                 case OF_KEY_DEL:
-					ofEvents().notifyKeyPressed(OF_KEY_BACKSPACE);
+					ofEvents().notifyKeyReleased(OF_KEY_BACKSPACE);
                     break;
                 case OF_KEY_RETURN:
-					ofEvents().notifyKeyPressed('\n');
+					ofEvents().notifyKeyReleased('\n');
                     break;
                 case OFXSKB_KEY_MOVE:
                 case OFXSKB_KEY_HIDE:
                 case OFXSKB_KEY_RESIZE:
                     break;
                 case OFXSKB_KEY_DOTCOM:
-					ofEvents().notifyKeyPressed('.');
-					ofEvents().notifyKeyPressed('c');
-					ofEvents().notifyKeyPressed('o');
-					ofEvents().notifyKeyPressed('m');
+					ofEvents().notifyKeyReleased('.');
+					ofEvents().notifyKeyReleased('c');
+					ofEvents().notifyKeyReleased('o');
+					ofEvents().notifyKeyReleased('m');
                     break;
                 case OFXSKB_KEY_DOTFR:
-					ofEvents().notifyKeyPressed('.');
-					ofEvents().notifyKeyPressed('f');
-					ofEvents().notifyKeyPressed('r');
+					ofEvents().notifyKeyReleased('.');
+					ofEvents().notifyKeyReleased('f');
+					ofEvents().notifyKeyReleased('r');
                     break;
                 default:
-					ofEvents().notifyKeyPressed(keys[i].key[tmp]);
+					ofEvents().notifyKeyReleased(keys[i].key[tmp]);
                     break;
             }
             break;
