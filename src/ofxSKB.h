@@ -74,7 +74,10 @@ class ofxSKB   {
     void mouseDragged(ofMouseEventArgs& args);
     void mouseMoved(ofMouseEventArgs& args);
     void mousePressed(ofMouseEventArgs& args);
-    void mouseReleased(ofMouseEventArgs& args);
+	void mouseReleased(ofMouseEventArgs& args);
+	void mouseScrolled(ofMouseEventArgs& args);
+	void mouseEntered(ofMouseEventArgs& args);
+	void mouseExited(ofMouseEventArgs& args);
     
     void setTextColor(int hexColor);
     void setTextBGColor(int hexColor);
